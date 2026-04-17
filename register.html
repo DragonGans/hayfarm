@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Hay Farm Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200..1000&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #175D2B 0%, #4CAF50 50%, #c9d8cf 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 50px;
+            width: 100%;
+            max-width: 420px;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .login-header h2 {
+            color: #175D2B;
+            font-weight: 800;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: 2px solid #e8f5e9;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #175D2B;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(23, 93, 43, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 18px;
+            top: 65%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 18px;
+            z-index: 2;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #175D2B, #4CAF50);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(23, 93, 43, 0.4);
+            background: linear-gradient(135deg, #145024, #45a049);
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid #eee;
+        }
+
+        .login-footer p {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .login-footer a {
+            color: #175D2B;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message, .success-message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            border-left: 4px solid;
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c33;
+            border-color: #f44336;
+        }
+
+        .success-message {
+            background: #e8f5e9;
+            color: #155724;
+            border-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+
+        <div class="login-header">
+            <h2>Registerasi Akun Baru</h2>
+            <p>Buat akun baru untuk melanjutkan</p>
+        </div>
+
+        <div id="errorMsg" class="error-message">
+            <i class="fas fa-exclamation-triangle"></i>
+            Mohon lengkapi semua field dengan benar!
+        </div>
+
+        <div id="successMsg" class="success-message" style="display: none;">
+            <i class="fas fa-check-circle"></i>
+            Registrasi berhasil! Silakan login.
+        </div>
+
+        <form id="registerForm">
+            <div class="form-group">
+                <label>Username</label>
+                <i class="fas fa-user input-icon"></i>
+                <input type="text" class="form-control" id="username" placeholder="Masukkan username" required>
+            </div>
+
+            <div class="form-group">
+                <label>No Telp</label>
+                <i class="fas fa-phone input-icon"></i>
+                <input type="tel" class="form-control" id="phone" placeholder="08xxxxxxxxx" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email address</label>
+                <i class="fas fa-envelope input-icon"></i>
+                <input type="email" class="form-control" id="email" placeholder="esteban_schiller@gmail.com" required>
+            </div>
+
+            <div class="form-group position-relative">
+                <label>Password</label>
+                <i class="fas fa-lock input-icon"></i>
+                <input type="password" id="password" class="form-control" style="padding-right: 50px;" placeholder="Masukkan password kuat" required>
+                <i class="fas fa-eye toggle-password" id="toggleRegisterPassword" style="position: absolute; right: 18px; top: 65%; transform: translateY(-50%); color: #999; font-size: 18px; cursor: pointer; z-index: 2;" title="Show password"></i>
+            </div>
+
+            <button type="submit" class="btn-login">
+                Daftar Akun Baru
+            </button>
+        </form>
+
+        <div class="login-footer">
+            <p>Sudah punya akun?</p>
+            <a href="login.html">Masuk ke sistem</a>
+            <p>&copy; 2025 Hay Farm. Semua hak dilindungi.</p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('registerForm');
+        const errorMsg = document.getElementById('errorMsg');
+        const successMsg = document.getElementById('successMsg');
+
+        // Password toggle
+        const toggleRegisterPassword = document.getElementById('toggleRegisterPassword');
+        const passwordInput = document.getElementById('password');
+        toggleRegisterPassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Email regex
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // Phone regex (Indonesian format)
+        const phoneRegex = /^08[0-9]{8,12}$/;
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Reset messages
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+
+            // Validation
+            if (!username || !phone || !email || !password) {
+                showError('Semua field wajib diisi!');
+                return;
+            }
+
+            if (!emailRegex.test(email)) {
+                showError('Format email tidak valid!');
+                return;
+            }
+
+            if (!phoneRegex.test(phone)) {
+                showError('Format nomor telepon tidak valid! (contoh: 08123456789)');
+                return;
+            }
+
+            // TEMP: No password length check for easy testing
+
+            // Demo success (no backend)
+            showSuccess();
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
+        });
+
+        function showError(msg) {
+            errorMsg.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${msg}`;
+            errorMsg.style.display = 'block';
+        }
+
+        function showSuccess() {
+            successMsg.innerHTML = `<i class="fas fa-check-circle"></i> Registrasi berhasil! Arahkan ke halaman login...`;
+            successMsg.style.display = 'block';
+        }
+
+        // Auto focus
+        document.getElementById('username').focus();
+    </script>
+</body>
+</html>
+
